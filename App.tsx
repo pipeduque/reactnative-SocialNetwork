@@ -3,6 +3,7 @@ import { createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from "./app/screens/Main";
+import LoginScreen from "./app/screens/security/Login";
 
 const Stack = createStackNavigator();
 
@@ -11,6 +12,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName = "INICIO">
         <Stack.Screen name = "INICIO" component= {HomeScreen} />
+        <Stack.Screen name = "Login" component = {LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

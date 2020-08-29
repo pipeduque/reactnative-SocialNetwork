@@ -43,7 +43,7 @@ export default class Main extends React.Component {
         } else {
             return (
                 <View style={styles.publicationsView}>
-                    <SessionNavbar navigation={navigation}></SessionNavbar>
+                    <SessionNavbar navigation = {navigation}></SessionNavbar>
                     <Text>Publicaciones</Text>
                     <FlatList style={styles.flatList} data={this.state.publications}
                         renderItem={({ item }) => (

@@ -17,7 +17,7 @@ export default class SessionNavbar extends React.Component {
         if (session) {
             this.setState({
                 isLoggedIn: true,
-                name: JSON.parse(session).data.username
+                name: JSON.parse(session).data.firstName
             });
         }
     }
@@ -42,12 +42,12 @@ export default class SessionNavbar extends React.Component {
 
     render() {
         if (this.state.isLoggedIn) {
-            return <Text onPress={this.signOut}>Session activa {this.state.name}</Text>
+            return <Text onPress={this.signOut}>Hola de nuevo, {this.state.name}</Text>
         } else {
             return (
                 <Button
                     title="Iniciar Sección"
-                    onPress={() => this.props.navigation.navigate("Login")}
+                    onPress={() => this.props.navigation.push("Login")}
                 />
             );
         }
