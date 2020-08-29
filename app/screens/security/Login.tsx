@@ -79,6 +79,8 @@ export default class Login extends React.Component {
           >
             <Text style={styles.buttonText}> Iniciar Sección </Text>
           </TouchableOpacity>
+          <Text style={styles.text} onPress={() => this.props.navigation.push("Register")}>¿No tienes una cuenta?</Text>
+          
         </SafeAreaView>
       </ImageBackground>
     );
@@ -97,6 +99,12 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
+  },
+  text: {
+    fontSize: 25,
     alignItems: "center",
     justifyContent: "center",
     color: "#fff",
