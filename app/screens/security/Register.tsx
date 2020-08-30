@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Alert, Text, TouchableOpacity, TextInput, ImageBackground, SafeAreaView, ScrollView } from "react-native";
 
 import * as Crypto from 'expo-crypto';
+import { ServiceConfig } from '../../config/service-config';
 
 const bgImg = require("../../../assets/bg/bg.png");
 
@@ -20,7 +21,7 @@ export default class Register extends React.Component {
         cellphone: "",
         birthdate: "",
         gender: "",
-        url: "http://192.168.1.13:3000/user",
+        url: `${ServiceConfig.BASE_URL}user`
     };
 
     async onLogin() {
@@ -48,7 +49,9 @@ export default class Register extends React.Component {
                 secondSurname: ss,
                 cellphone: c,
                 birthdate: b,
-                gender: g
+                gender: g,
+                pathPhoto: "sinfoto.png",
+                role: 4
             }),
         })
             .then((data) => data.json())

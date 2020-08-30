@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Alert, View, Text, FlatList, Image, TouchableHighlight } from "react-native";
+import { StyleSheet, Alert, View, Text, FlatList, Image, TouchableHighlight, Button } from "react-native";
 import SessionNavbar from './security/SessionNavbar';
+import { ServiceConfig } from '../config/service-config';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -9,7 +10,7 @@ export default class Main extends React.Component {
         this.state = {
             loading: false,
             publications: [],
-            url: 'http://192.168.1.13:3000/publication'
+            url: `${ServiceConfig.BASE_URL}publication`
         };
     }
 
@@ -43,28 +44,29 @@ export default class Main extends React.Component {
         } else {
             return (
                 <View style={styles.publicationsView}>
-                    <SessionNavbar navigation = {navigation}></SessionNavbar>
-                    <Text>Publicaciones</Text>
-                    <FlatList style={styles.flatList} data={this.state.publications}
+                    <FlatList showsVerticalScrollIndicator={false} style={styles.flatList} data={this.state.publications}
                         renderItem={({ item }) => (
                             <View style={styles.publicationViewContent}>
+
+                                <Text style={styles.publicationTitle}>{item.title}</Text>
                                 <TouchableHighlight
                                     onPress={() => {
-                                        Alert.alert("Imagen tocada", `Publicación: ${item.title}`);
+                                        Alert.alert("Descripción", item.content);
                                     }}>
                                     <Image source={{
                                         width: 200,
                                         height: 150,
-                                        uri: `http://192.168.1.13:3000/files/publication/${item.id}`
+                                        uri: `${ServiceConfig.BASE_URL}files/publication/${item.id}`
                                     }}
                                     ></Image>
                                 </TouchableHighlight>
-                                <Text style={styles.publicationTitle}>{item.title}</Text>
-                                <Text numberOfLines={1}>{item.content}</Text>
-                                <Text> Usuario: {item.userId}</Text>
+                                <Text
+                                    onPress={() => this.props.navigation.navigate("Profile", { id: item.userId })}
+                                >ver dueño</Text>
                             </View>
                         )}
                     ></FlatList>
+                    <SessionNavbar navigation={navigation}></SessionNavbar>
                 </View>
             );
         }
@@ -77,6 +79,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 5,
         margin: 5,
+        marginTop: 32,
         alignItems: "center",
         justifyContent: "center"
     },
@@ -97,6 +100,7 @@ const styles = StyleSheet.create({
     flatList: {
         alignContent: "center",
         textAlign: "center",
-        alignSelf: "center"
+        alignSelf: "center",
+        marginBottom: 70
     }
 });

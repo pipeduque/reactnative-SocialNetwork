@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Alert, Text, TouchableOpacity, TextInput, ImageBackground, SafeAreaView, AsyncStorage } from "react-native";
 
 import * as Crypto from 'expo-crypto';
+import { ServiceConfig } from '../../config/service-config';
 
 
 const bgImg = require("../../../assets/bg/bg.png");
@@ -14,7 +15,7 @@ export default class Login extends React.Component {
   state = {
     email: "",
     password: "",
-    url: "http://192.168.1.13:3000/login",
+    url: `${ServiceConfig.BASE_URL}login`
   };
 
   async onLogin() {
