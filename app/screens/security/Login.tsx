@@ -5,7 +5,7 @@ import * as Crypto from 'expo-crypto';
 import { ServiceConfig } from '../../config/service-config';
 
 
-const bgImg = require("../../../assets/bg/bg.png");
+const bgImg = require("../../../assets/bg/bg2.jpg");
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -38,6 +38,7 @@ export default class Login extends React.Component {
         if (data.error) {
           Alert.alert("VIVIENDA COMPARTIDA", "Datos invalidos");
         } else {
+          console.log(data)
           this.state.email = "";
           this.state.password = "";
           AsyncStorage.setItem("session", JSON.stringify(data));
@@ -56,7 +57,7 @@ export default class Login extends React.Component {
     return (
       <ImageBackground source={bgImg} style={styles.backgroundApp}>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.titleText}>Hola, Bienvenido</Text>
+          <Text style={styles.titleText}>VIVIENDA COMPARTIDA</Text>
           <TextInput
             value={this.state.email}
             keyboardType="default"
@@ -78,7 +79,7 @@ export default class Login extends React.Component {
             style={styles.button}
             onPress={this.onLogin.bind(this)}
           >
-            <Text style={styles.buttonText}> Iniciar Sección </Text>
+            <Text style={styles.buttonText}> Iniciar Sesión </Text>
           </TouchableOpacity>
           <Text style={styles.text} onPress={() => this.props.navigation.push("Register")}>¿No tienes una cuenta?</Text>
           
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   titleText: {
-    fontSize: 50,
+    fontSize: 30,
     alignItems: "center",
     justifyContent: "center",
     color: "#fff",

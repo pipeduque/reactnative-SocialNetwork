@@ -4,7 +4,7 @@ import { StyleSheet, Alert, Text, TouchableOpacity, TextInput, ImageBackground, 
 import * as Crypto from 'expo-crypto';
 import { ServiceConfig } from '../../config/service-config';
 
-const bgImg = require("../../../assets/bg/bg.png");
+const bgImg = require("../../../assets/bg/bg2.jpg");
 
 export default class Register extends React.Component {
     constructor(props) {

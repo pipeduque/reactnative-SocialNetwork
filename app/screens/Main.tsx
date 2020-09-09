@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Alert, View, Text, FlatList, Image, TouchableHighlight, Button } from "react-native";
+import { StyleSheet, Alert, View, Text, FlatList, Image, TouchableHighlight, Button, ImageBackground } from "react-native";
 import SessionNavbar from './security/SessionNavbar';
 import { ServiceConfig } from '../config/service-config';
+
+const bgImg = require("../../assets/bg/bg2.jpg");
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -43,38 +45,43 @@ export default class Main extends React.Component {
             );
         } else {
             return (
-                <View style={styles.publicationsView}>
-                    <FlatList showsVerticalScrollIndicator={false} style={styles.flatList} data={this.state.publications}
-                        renderItem={({ item }) => (
-                            <View style={styles.publicationViewContent}>
+                <ImageBackground source={bgImg} style={styles.backgroundApp}>
+                    <View style={styles.publicationsView}>
+                        <FlatList showsVerticalScrollIndicator={false} style={styles.flatList} data={this.state.publications}
+                            renderItem={({ item }) => (
+                                <View style={styles.publicationViewContent}>
 
-                                <Text style={styles.publicationTitle}>{item.title}</Text>
-                                <TouchableHighlight
-                                    onPress={() => {
-                                        Alert.alert("Descripción", item.content);
-                                    }}>
-                                    <Image source={{
-                                        width: 200,
-                                        height: 150,
-                                        uri: `${ServiceConfig.BASE_URL}files/publication/${item.id}`
-                                    }}
-                                    ></Image>
-                                </TouchableHighlight>
-                                <Text
-                                    onPress={() => this.props.navigation.navigate("Profile", { id: item.userId })}
-                                >ver dueño</Text>
-                            </View>
-                        )}
-                    ></FlatList>
-                    <SessionNavbar navigation={navigation}></SessionNavbar>
-                </View>
+                                    <Text style={styles.publicationTitle} onPress={() => this.props.navigation.navigate("Profile", { id: item.userId })}> {item.title} </Text>
+                                    <TouchableHighlight
+                                        onPress={() => {
+                                            Alert.alert("Descripción", item.content);
+                                        }}>
+                                        <Image source={{
+                                            width: 200,
+                                            height: 150,
+                                            uri: `${ServiceConfig.BASE_URL}files/publication/${item.id}`
+                                        }}
+                                        ></Image>
+                                    </TouchableHighlight>
+                                    <Text>{item.location}</Text>
+                                </View>
+                            )}
+                        ></FlatList>
+                        <SessionNavbar navigation={navigation}></SessionNavbar>
+                    </View>
+                </ImageBackground>
             );
         }
     }
 }
 
 const styles = StyleSheet.create({
+    backgroundApp: {
+        flex: 1,
+        width: "100%",
+    },
     publicationViewContent: {
+        backgroundColor: "gray",
         borderColor: "gray",
         borderWidth: 2,
         borderRadius: 5,

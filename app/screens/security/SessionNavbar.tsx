@@ -41,6 +41,7 @@ export default class SessionNavbar extends React.Component {
                         id: "",
                         name: ""
                     });
+                    this.props.navigation.push("INICIO");
                 }
             },
             {
@@ -89,7 +90,7 @@ export default class SessionNavbar extends React.Component {
                 <View style={{
                     flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
                 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("Creation",  { id: this.state.id })}>
                         <Image
                             style={{ width: 30, height: 30 }}
                             source={aggImg}

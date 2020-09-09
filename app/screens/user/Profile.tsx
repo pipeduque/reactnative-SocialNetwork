@@ -1,10 +1,11 @@
 import React, { useReducer } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, ImageBackground } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { FlatList, TouchableHighlight } from "react-native-gesture-handler";
 import SessionNavbar from "../security/SessionNavbar";
 import { ServiceConfig } from '../../config/service-config';
 
+const bgImg = require("../../../assets/bg/bg2.jpg");
 
 export default class Profile extends React.Component {
 
@@ -78,74 +79,81 @@ export default class Profile extends React.Component {
             );
         } else {
             return (
+
                 <SafeAreaView style={styles.container}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={styles.titleBar}>
-                            <Ionicons name="md-more" size={24} color="#52575D"></Ionicons>
-                        </View>
-
-                        <View style={{ alignSelf: "center" }}>
-                            <View style={styles.profileImage}>
-                                <Image source={{ uri: `${ServiceConfig.BASE_URL}files/user/${this.userId}` }} style={styles.image} resizeMode="center"></Image>
+                    <ImageBackground source={bgImg} style={styles.backgroundApp}>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            <View style={styles.titleBar}>
+                                <Ionicons name="md-more" size={24} color="#52575D"></Ionicons>
                             </View>
-                            <View style={styles.dm}>
-                                <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
-                            </View>
-                            <View style={styles.active}></View>
-                            <View style={styles.add}>
-                                <Ionicons name="ios-add" size={48} color="#DFD8C8" style={{ marginTop: 6, marginLeft: 2 }}></Ionicons>
-                            </View>
-                        </View>
 
-                        <View style={styles.infoContainer}>
-                            <Text style={[styles.text, { fontWeight: "200", fontSize: 16 }]}>{this.state.user}</Text>
-                            <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>{this.state.birthdate}</Text>
-                            <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>{this.state.gender}</Text>
-                        </View>
-
-                        <View style={styles.statsContainer}>
-                            <View style={styles.statsBox}>
-                                <Text style={[styles.text, { fontSize: 10 }]}>{this.state.cellphone}</Text>
-                                <Text style={[styles.text, styles.subText]}>Celular</Text>
-                            </View>
-                            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                                <Text style={[styles.text, { fontSize: 10 }]}>{this.state.email}</Text>
-                                <Text style={[styles.text, styles.subText]}>mail</Text>
-                            </View>
-                        </View>
-
-                        <View style={{ marginTop: 32 }}>
-
-
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-
-                                <View style={styles.mediaImageContainer}>
-
-                                    <FlatList horizontal showsHorizontalScrollIndicator={false} style={styles.flatList} data={this.state.publications}
-                                        renderItem={({ item }) => (
-                                            <View style={styles.publicationViewContent}>
-                                                <TouchableHighlight
-                                                    onPress={() => {
-                                                        Alert.alert("Descripción", item.content);
-                                                    }}>
-                                                    <Image source={{
-                                                        width: 200,
-                                                        height: 150,
-                                                        uri: `${ServiceConfig.BASE_URL}files/publication/${item.id}`
-                                                    }}
-                                                    ></Image>
-                                                </TouchableHighlight>
-                                                <Text style={styles.publicationTitle}>{item.title}</Text>
-                                            </View>
-                                        )}
-                                    ></FlatList>
+                            <View style={{ alignSelf: "center" }}>
+                                <View style={styles.profileImage}>
+                                    <Image source={{ uri: `${ServiceConfig.BASE_URL}files/user/${this.userId}` }} style={styles.image} resizeMode="center"></Image>
                                 </View>
-                            </ScrollView>
-                        </View>
-                        <View style={{ alignItems: "center" }}>
-                            <Text style={[styles.subText, styles.recent]}></Text>
-                        </View>
-                    </ScrollView>
+                                <View style={styles.dm}>
+                                    <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
+                                </View>
+                                <View style={styles.active}></View>
+                                <View style={styles.add}>
+                                    <Ionicons name="ios-add" size={48} color="#DFD8C8" style={{ marginTop: 6, marginLeft: 2 }}></Ionicons>
+                                </View>
+                            </View>
+
+                            <View style={styles.infoContainer}>
+                                <Text style={[styles.text, { fontWeight: "200", fontSize: 16 }]}>{this.state.user}</Text>
+                                <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>{this.state.birthdate}</Text>
+                                <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>{this.state.gender}</Text>
+                            </View>
+
+                            <View style={styles.statsContainer}>
+                                <View style={styles.statsBox}>
+                                    <Text style={[styles.text, { fontSize: 10 }]}>{this.state.cellphone}</Text>
+                                    <Text style={[styles.text, styles.subText]}>Celular</Text>
+                                </View>
+                                <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                                    <Text style={[styles.text, { fontSize: 10 }]}>{this.state.email}</Text>
+                                    <Text style={[styles.text, styles.subText]}>mail</Text>
+                                </View>
+                            </View>
+
+                            <View style={{ marginTop: 32 }}>
+
+
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+
+                                    <View style={styles.mediaImageContainer}>
+
+
+                                        <FlatList horizontal showsHorizontalScrollIndicator={false} style={styles.flatList} data={this.state.publications}
+                                            renderItem={({ item }) => (
+                                                <View style={styles.publicationViewContent}>
+                                                    <Text style={styles.publicationTitle}>{item.title}</Text>
+                                                    <TouchableHighlight
+                                                        onPress={() => {
+                                                            Alert.alert("Descripción", item.content);
+                                                        }}>
+                                                        <Image source={{
+                                                            width: 200,
+                                                            height: 150,
+                                                            uri: `${ServiceConfig.BASE_URL}files/publication/${item.id}`
+                                                        }}
+                                                        ></Image>
+                                                    </TouchableHighlight>
+                                                    <Text>{item.location}</Text>
+
+                                                </View>
+                                            )}
+                                        ></FlatList>
+
+                                    </View>
+                                </ScrollView>
+                            </View>
+                            <View style={{ alignItems: "center" }}>
+                                <Text style={[styles.subText, styles.recent]}></Text>
+                            </View>
+                        </ScrollView>
+                    </ImageBackground>
                     <SessionNavbar navigation={navigation}></SessionNavbar>
                 </SafeAreaView>
 
@@ -157,6 +165,10 @@ export default class Profile extends React.Component {
 
 
 const styles = StyleSheet.create({
+    backgroundApp: {
+        flex: 1,
+        width: "100%",
+    },
     container: {
         flex: 1,
         backgroundColor: "#FFF"
@@ -276,10 +288,12 @@ const styles = StyleSheet.create({
         marginRight: 20
     },
     publicationViewContent: {
+        backgroundColor: "gray",
         borderColor: "gray",
         borderWidth: 2,
         borderRadius: 5,
         margin: 5,
+        marginTop: 32,
         alignItems: "center",
         justifyContent: "center"
     },
